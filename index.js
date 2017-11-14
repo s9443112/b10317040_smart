@@ -4,7 +4,7 @@ var express = require('express');
 var bot = linebot({
     channelId: '1546465131',
     channelSecret: '619970c732873283d90e86065c92c055',
-    channelAccessToken: 'PryRBFzoceAjkzOWGCbRFiVJ1bjFoQCYqkcylf2hJmORbTVZDu1Reh/mn9U7cnyW79byynPL51qBKvZxaGeUqY/YDIkcp38K6RErlFMAOb3wPiPPBLeKlbIvvk9mrNVwCNR4OobqNoQWph+QDp5XgQdB04t89/1O/w1cDnyilFU='
+    channelAccessToken: 'JiNLL7T/J4PvQtWI+zRo06jQztaBNfa89IVT2P2QQS2Le0EUlYWzEo1GKo5qgiVoJNBxAogjdT4vCa8HYrOyGy/lg7cd8m/qzOu8XdC6PoaB1wCpFGi37XhlwtZ2ikFmTqkGuemT/PReJjsBqLXoAQdB04t89/1O/w1cDnyilFU='
 });
 
 var get_userID;
