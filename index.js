@@ -9,6 +9,12 @@ var bot = linebot({
     channelAccessToken: 'JiNLL7T/J4PvQtWI+zRo06jQztaBNfa89IVT2P2QQS2Le0EUlYWzEo1GKo5qgiVoJNBxAogjdT4vCa8HYrOyGy/lg7cd8m/qzOu8XdC6PoaB1wCpFGi37XhlwtZ2ikFmTqkGuemT/PReJjsBqLXoAQdB04t89/1O/w1cDnyilFU='
 });
 
+var bot2 = linebot({
+    channelId: '1521651731',
+    channelSecret: 'cb7bd6d597850040ac83a226506d026c',
+    channelAccessToken: 'PryRBFzoceAjkzOWGCbRFiVJ1bjFoQCYqkcylf2hJmORbTVZDu1Reh/mn9U7cnyW79byynPL51qBKvZxaGeUqY/YDIkcp38K6RErlFMAOb3wPiPPBLeKlbIvvk9mrNVwCNR4OobqNoQWph+QDp5XgQdB04t89/1O/w1cDnyilFU='
+  });
+
 var get_userID;
 var flag;
 
@@ -50,7 +56,7 @@ var service_Msg = {
 
 var userId = 'U6b9092b8b94288a689e880df6bd043e0';
 var sendMsg = '智慧轉蛋機 我重開機了';
-bot.push(userId, sendMsg);
+bot2.push(userId, sendMsg);
 
 bot.on('follow', function (event) {
     get_userID = event.source.userId;
