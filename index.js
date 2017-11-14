@@ -1,4 +1,4 @@
-import { setTimeout } from 'timers';
+
 
 var linebot = require('linebot');
 var express = require('express');
