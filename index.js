@@ -1,3 +1,5 @@
+import { setTimeout } from 'timers';
+
 var linebot = require('linebot');
 var express = require('express');
 
@@ -8,38 +10,40 @@ var bot = linebot({
 });
 
 var get_userID;
+var flag;
 
-var service_Msg ={
-        "type": "template",
-        "altText": "this is a buttons template",
-        "template": {
-            "type": "buttons",
-            "thumbnailImageUrl": "https://upload.wikimedia.org/wikipedia/zh/thumb/7/79/Rem_from_Re-Zero_Episode_7.png/200px-Rem_from_Re-Zero_Episode_7.png",
-            "title": "Menu",
-            "text": "需要什麼服務",
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "查詢當下紅利餘額",
-                    "data": "action=select"
-                },
-                {
-                    "type": "postback",
-                    "label": "匯入紅利代碼",
-                    "data": "action=insert"
-                },
-                {
-                    "type": "postback",
-                    "label": "兌換免費遊玩",
-                    "data": "action=change"
-                },
-                {
-                    "type": "postback",
-                    "label": "查詢機台地點",
-                    "data": "action=select_where"
-                }
-            ]
-        }
+
+var service_Msg = {
+    "type": "template",
+    "altText": "this is a buttons template",
+    "template": {
+        "type": "buttons",
+        "thumbnailImageUrl": "https://upload.wikimedia.org/wikipedia/zh/thumb/7/79/Rem_from_Re-Zero_Episode_7.png/200px-Rem_from_Re-Zero_Episode_7.png",
+        "title": "Menu",
+        "text": "需要什麼服務",
+        "actions": [
+            {
+                "type": "postback",
+                "label": "查詢當下紅利餘額",
+                "data": "action=select"
+            },
+            {
+                "type": "postback",
+                "label": "匯入紅利代碼",
+                "data": "action=insert"
+            },
+            {
+                "type": "postback",
+                "label": "兌換免費遊玩",
+                "data": "action=change"
+            },
+            {
+                "type": "postback",
+                "label": "查詢機台地點",
+                "data": "action=select_where"
+            }
+        ]
+    }
 }
 
 
@@ -63,9 +67,45 @@ bot.on('message', function (event) {
     console.log("--------------");
     console.log(event); //顯示訊息格式
     console.log("--------------");
+    if (flag == 1) {
+        if (event.message.type == 'text') {
+            var msg = "你輸入的是編號 ：" + event.message.text;
+            bot.push(get_userID, msg);
+            setTimeout(function(){
+                var msg = "確認機台：" + event.message.text+" 可以遊玩";
+                bot.push(get_userID, msg);
+            },2000)
+        } else {
+            bot.push(get_userID, '我看不懂喔！');
+        }
+    }
+    if (flag == 2) {
+        if (event.message.type == 'text') {
+            var msg = "你輸入的是紅利代碼是 ：" + event.message.text;
+            bot.push(get_userID, msg);
+            setTimeout(function(){
+                var msg = "確認紅利代碼正確";
+                bot.push(get_userID, msg);
+            },2000)
+        } else {
+            bot.push(get_userID, '我看不懂喔！');
+        }
+    }
+    if (flag == 3) {
+        if (event.message.type == 'text') {
+            var msg = "確認是否還有餘額點數 ：" + event.message.text;
+            bot.push(get_userID, msg);
+        } else {
+            bot.push(get_userID, '我看不懂喔！');
+        }
+    }
+    
+
     if (event.message.type == 'text') {
         var msg = event.message.text;
         bot.push(get_userID, msg);
+    } else {
+        bot.push(get_userID, '我看不懂喔！');
     }
 });
 
@@ -78,6 +118,7 @@ bot.on('postback', function (event) {
         replyMsg = '請輸入機台編號';
         event.reply(replyMsg).then(function (data) {
             console.log("輸出line Msg " + replyMsg);
+            flag = 1;
         }).catch(function (error) {
             console.log('輸出line error');
         });
@@ -86,22 +127,25 @@ bot.on('postback', function (event) {
         replyMsg = '請輸入紅利代碼';
         event.reply(replyMsg).then(function (data) {
             console.log("輸出line Msg " + replyMsg);
+            flag = 2;
         }).catch(function (error) {
             console.log('輸出line error');
         });
     }
-    if (event.postback.data == 'action=insert') {
+    if (event.postback.data == 'action=change') {
         replyMsg = '免費遊玩開始';
         event.reply(replyMsg).then(function (data) {
             console.log("輸出line Msg " + replyMsg);
+            flag = 3;
         }).catch(function (error) {
             console.log('輸出line error');
         });
     }
-    if (event.postback.data == 'action=insert') {
-        replyMsg = '機台位置目前在：';
+    if (event.postback.data == 'action=select_where') {
+        replyMsg = '機台位置目前在：雲科,台中';
         event.reply(replyMsg).then(function (data) {
             console.log("輸出line Msg " + replyMsg);
+            flag = 4;
         }).catch(function (error) {
             console.log('輸出line error');
         });
