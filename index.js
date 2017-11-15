@@ -3,7 +3,7 @@
 var linebot = require('linebot');
 var express = require('express');
 
-var modules = require('../modules/modules.js');
+var modules = require('modules/modules.js');
 
 
 var bot = linebot({
@@ -13,10 +13,10 @@ var bot = linebot({
 });
 
 var bot2 = linebot({
-    channelId: '1521651731',
-    channelSecret: 'cb7bd6d597850040ac83a226506d026c',
-    channelAccessToken: 'PryRBFzoceAjkzOWGCbRFiVJ1bjFoQCYqkcylf2hJmORbTVZDu1Reh/mn9U7cnyW79byynPL51qBKvZxaGeUqY/YDIkcp38K6RErlFMAOb3wPiPPBLeKlbIvvk9mrNVwCNR4OobqNoQWph+QDp5XgQdB04t89/1O/w1cDnyilFU='
-  });
+    channelId: '1523598858',
+    channelSecret: 'd0fb193f3cb311760c7194039ea3f269',
+    channelAccessToken: 'DLkKE+hL1Qu/1mGW6eiE5n/YfM08G0OHxMp6rE4c3K8toWn9i+ErQvx8a+woVDUkMCrCWiq/TCmDSTdtUbztN60l+8d+QytQ1iS4Ojg2us9gpALPP6EI/bIbe7mHVWhPhtnGYZiaRjlfOFckYHHJGQdB04t89/1O/w1cDnyilFU='
+});
 
 var get_userID;
 var flag;
@@ -80,7 +80,7 @@ bot.on('message', function (event) {
         if (event.message.type == 'text') {
             var msg = "當前餘額剩下0元";
             bot.push(get_userID, msg);
-            
+
         } else {
             bot.push(get_userID, '我看不懂喔！');
         }
@@ -89,11 +89,11 @@ bot.on('message', function (event) {
         if (event.message.type == 'text') {
             var msg = "你輸入的是紅利代碼是 ：" + event.message.text;
             bot.push(get_userID, msg);
-            setTimeout(function(){
+            setTimeout(function () {
                 var msg = "確認紅利代碼正確";
                 bot.push(get_userID, msg);
-                flag=0;
-            },2000)
+                flag = 0;
+            }, 2000)
         } else {
             bot.push(get_userID, '我看不懂喔！');
         }
@@ -102,12 +102,12 @@ bot.on('message', function (event) {
         if (event.message.type == 'text') {
             var msg = "確認是否還有餘額點數 ：" + event.message.text;
             bot.push(get_userID, msg);
-            flag=0;
+            flag = 0;
         } else {
             bot.push(get_userID, '我看不懂喔！');
         }
     }
-    
+
 
     if (event.message.type == 'text') {
         var msg = event.message.text;
