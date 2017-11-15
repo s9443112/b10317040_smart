@@ -3,6 +3,9 @@
 var linebot = require('linebot');
 var express = require('express');
 
+var modules = require('../modules/modules.js');
+
+
 var bot = linebot({
     channelId: '1546465131',
     channelSecret: '619970c732873283d90e86065c92c055',
@@ -75,12 +78,9 @@ bot.on('message', function (event) {
     console.log("--------------");
     if (flag == 1) {
         if (event.message.type == 'text') {
-            var msg = "你輸入的是編號 ：" + event.message.text;
+            var msg = "當前餘額剩下0元";
             bot.push(get_userID, msg);
-            setTimeout(function(){
-                var msg = "確認機台：" + event.message.text+" 可以遊玩";
-                bot.push(get_userID, msg);
-            },2000)
+            
         } else {
             bot.push(get_userID, '我看不懂喔！');
         }
@@ -92,6 +92,7 @@ bot.on('message', function (event) {
             setTimeout(function(){
                 var msg = "確認紅利代碼正確";
                 bot.push(get_userID, msg);
+                flag=0;
             },2000)
         } else {
             bot.push(get_userID, '我看不懂喔！');
@@ -101,6 +102,7 @@ bot.on('message', function (event) {
         if (event.message.type == 'text') {
             var msg = "確認是否還有餘額點數 ：" + event.message.text;
             bot.push(get_userID, msg);
+            flag=0;
         } else {
             bot.push(get_userID, '我看不懂喔！');
         }
